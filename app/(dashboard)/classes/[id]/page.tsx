@@ -1,5 +1,7 @@
 import { getClassDetail } from "@/lib/services/class-detail";
 import ClassStatus from "@/components/classes/class-status";
+import ClassSummary from "@/components/classes/class-summary";
+import ViolationHistory from "@/components/violations/violation-history";
 
 export default async function ClassDetailPage({
   params,
@@ -8,12 +10,12 @@ export default async function ClassDetailPage({
 }) {
   const { id } = await params;
 
-  const { kelas, violations } =
-    await getClassDetail(id);
+  const { kelas, violations } = await getClassDetail(id);
 
   return (
     <div className="space-y-8">
 
+      {/* Header */}
       <div className="rounded-2xl bg-white p-8 shadow">
 
         <h1 className="text-4xl font-bold">
@@ -29,7 +31,7 @@ export default async function ClassDetailPage({
           <div>
 
             <p className="text-sm text-gray-500">
-              Poin
+              Sisa Poin
             </p>
 
             <p className="text-5xl font-bold text-blue-600">
@@ -46,62 +48,16 @@ export default async function ClassDetailPage({
 
       </div>
 
-      <div className="rounded-2xl bg-white p-8 shadow">
+      {/* Ringkasan */}
+      <ClassSummary
+        points={kelas.points}
+        violations={violations.length}
+      />
 
-        <h2 className="mb-6 text-2xl font-bold">
-          Riwayat Pelanggaran
-        </h2>
-
-        {violations.length === 0 ? (
-          <p className="text-gray-500">
-            Belum ada pelanggaran.
-          </p>
-        ) : (
-          <div className="space-y-4">
-
-            {violations.map((item: any) => (
-              <div
-                key={item.id}
-                className="rounded-xl border p-4"
-              >
-                <div className="flex justify-between">
-
-                  <div>
-
-                    <p className="font-semibold">
-                      {item.category}
-                    </p>
-
-                    <p className="text-sm text-gray-500">
-                      {item.teacher}
-                    </p>
-
-                    <p className="text-sm text-gray-400">
-                      {item.description}
-                    </p>
-
-                  </div>
-
-                  <div className="text-right">
-
-                    <p className="font-bold text-red-600">
-                      -{item.deduction}
-                    </p>
-
-                    <p className="text-xs text-gray-400">
-                      {new Date(item.created_at).toLocaleDateString("id-ID")}
-                    </p>
-
-                  </div>
-
-                </div>
-              </div>
-            ))}
-
-          </div>
-        )}
-
-      </div>
+      {/* Riwayat Pelanggaran */}
+      <ViolationHistory
+        violations={violations}
+      />
 
     </div>
   );

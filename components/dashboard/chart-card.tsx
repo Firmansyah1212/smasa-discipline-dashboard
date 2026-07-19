@@ -1,48 +1,52 @@
 "use client";
 
-import {
-  LineChart,
-  Line,
-  ResponsiveContainer,
-  CartesianGrid,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+interface Props {
+  data: {
+    name: string;
+    points: number;
+  }[];
+}
 
-const data = [
-  { day: "Sen", point: 100 },
-  { day: "Sel", point: 98 },
-  { day: "Rab", point: 96 },
-  { day: "Kam", point: 95 },
-  { day: "Jum", point: 94 },
-];
-
-export default function ChartCard() {
+export default function ChartCard({ data }: Props) {
   return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="font-bold text-xl mb-5">
-        Grafik Poin
+    <div className="rounded-2xl bg-white p-6 shadow">
+
+      <h2 className="mb-6 text-xl font-bold">
+        Grafik Poin Kelas
       </h2>
 
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="5 5" />
+      <div className="space-y-4">
 
-          <XAxis dataKey="day" />
+        {data.length === 0 ? (
+          <p className="text-gray-500">
+            Belum ada data.
+          </p>
+        ) : (
+          data.map((item) => (
+            <div key={item.name}>
 
-          <YAxis />
+              <div className="mb-1 flex justify-between text-sm">
+                <span>{item.name}</span>
+                <span>{item.points}</span>
+              </div>
 
-          <Tooltip />
+              <div className="h-3 rounded-full bg-slate-200">
 
-          <Line
-            type="monotone"
-            dataKey="point"
-            stroke="#2563eb"
-            strokeWidth={3}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+                <div
+                  className="h-3 rounded-full bg-blue-600 transition-all"
+                  style={{
+                    width: `${item.points}%`,
+                  }}
+                />
+
+              </div>
+
+            </div>
+          ))
+        )}
+
+      </div>
+
     </div>
   );
 }

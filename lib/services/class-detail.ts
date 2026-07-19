@@ -9,13 +9,23 @@ export async function getClassDetail(id: string) {
 
   if (error) throw error;
 
-  const { data: violations } = await supabase
-    .from("violations")
-    .select("*")
-    .eq("class_id", id)
-    .order("created_at", {
-      ascending: false,
-    });
+  const { data: violations, error: violationError } =
+    await supabase
+      .from("violations")
+      .select(`
+        *,
+        violation_categories(
+          id,
+          name,
+          deduction
+        )
+      `)
+      .eq("class_id", id)
+      .order("violation_date", {
+        ascending: false,
+      });
+
+  if (violationError) throw violationError;
 
   return {
     kelas,

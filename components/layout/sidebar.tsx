@@ -11,11 +11,11 @@ import {
 } from "lucide-react";
 
 const menus = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
+ {
+  title: "Dashboard",
+  href: "/",
+  icon: LayoutDashboard,
+},
   {
     title: "Data Kelas",
     href: "/classes",

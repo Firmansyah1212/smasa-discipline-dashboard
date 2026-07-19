@@ -12,3 +12,7 @@ export async function getClasses() {
 
   return data ?? [];
 }
+
+export async function getClassDetail(id: string) {
+  // nanti kita isi query Supabase
+}

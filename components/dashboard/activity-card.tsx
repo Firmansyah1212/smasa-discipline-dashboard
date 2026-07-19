@@ -1,32 +1,80 @@
-import { History } from "lucide-react";
+interface Props {
+  activities: {
+    id: string;
+    teacher: string;
+    description: string;
+    violation_date: string;
 
-const data = [
-  "XI IPA 1 - Kedisiplinan (-5)",
-  "X.8 - Kebersihan (-5)",
-  "XI Teknik 2 - Kerapian (-2)",
-  "XII IPS 1 - Terlambat (-5)",
-];
+    classes?: {
+      code: string;
+    }[];
 
-export default function ActivityCard() {
+    violation_categories?: {
+      name: string;
+      deduction: number;
+    }[];
+  }[];
+}
+
+export default function ActivityCard({
+  activities,
+}: Props) {
   return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <div className="flex items-center gap-2 mb-5">
-        <History />
-        <h2 className="text-xl font-bold">
-          Aktivitas Terbaru
-        </h2>
+    <div className="rounded-2xl bg-white p-6 shadow">
+
+      <h2 className="mb-6 text-xl font-bold">
+        Aktivitas Terbaru
+      </h2>
+
+      <div className="space-y-4">
+
+        {activities.length === 0 ? (
+          <p className="text-gray-500">
+            Belum ada aktivitas.
+          </p>
+        ) : (
+          activities.map((item) => (
+            <div
+              key={item.id}
+              className="rounded-lg border p-4"
+            >
+
+              <div className="flex items-center justify-between">
+
+                <div>
+
+                  <p className="font-semibold">
+                    {item.classes?.[0]?.code}
+                  </p>
+
+                  <p className="text-sm text-gray-500">
+                    {item.violation_categories?.[0]?.name}
+                  </p>
+
+                  <p className="text-sm">
+                    {item.description}
+                  </p>
+
+                  <p className="mt-2 text-xs text-gray-400">
+                    Guru: {item.teacher}
+                  </p>
+
+                </div>
+
+                <div className="text-xs text-gray-400">
+                  {new Date(
+                    item.violation_date
+                  ).toLocaleDateString("id-ID")}
+                </div>
+
+              </div>
+
+            </div>
+          ))
+        )}
+
       </div>
 
-      <div className="space-y-3">
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="rounded-lg bg-slate-50 p-3"
-          >
-            {item}
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

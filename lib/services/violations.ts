@@ -7,6 +7,29 @@ interface AddViolationData {
   description: string;
   violation_date: string;
 }
+export async function getViolations() {
+  const { data, error } = await supabase
+    .from("violations")
+    .select(`
+      *,
+      classes (
+        id,
+        code
+      ),
+      violation_categories (
+        id,
+        name,
+        deduction
+      )
+    `)
+    .order("violation_date", {
+      ascending: false,
+    });
+
+  if (error) throw error;
+
+  return data ?? [];
+}
 
 export async function addViolation(data: AddViolationData) {
   const { error } = await supabase.rpc(
