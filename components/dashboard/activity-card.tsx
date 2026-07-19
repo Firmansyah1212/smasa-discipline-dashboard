@@ -1,3 +1,9 @@
+import {
+  CalendarDays,
+  User,
+  AlertTriangle,
+} from "lucide-react";
+
 interface Props {
   activities: {
     id: string;
@@ -20,57 +26,103 @@ export default function ActivityCard({
   activities,
 }: Props) {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow">
+    <div className="rounded-2xl border bg-white p-5 shadow-sm md:p-6">
 
-      <h2 className="mb-6 text-xl font-bold">
-        Aktivitas Terbaru
-      </h2>
+      <div className="mb-6">
+
+        <h2 className="text-lg font-bold md:text-xl">
+          Aktivitas Terbaru
+        </h2>
+
+        <p className="mt-1 text-sm text-gray-500">
+          Riwayat pelanggaran yang baru ditambahkan
+        </p>
+
+      </div>
 
       <div className="space-y-4">
 
         {activities.length === 0 ? (
-          <p className="text-gray-500">
-            Belum ada aktivitas.
-          </p>
+
+          <div className="rounded-xl bg-slate-50 py-10 text-center">
+
+            <p className="text-gray-500">
+              Belum ada aktivitas.
+            </p>
+
+          </div>
+
         ) : (
+
           activities.map((item) => (
+
             <div
               key={item.id}
-              className="rounded-lg border p-4"
+              className="rounded-xl border p-4 transition-all duration-300 hover:bg-slate-50 hover:shadow-sm"
             >
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
 
-                <div>
+                <div className="flex-1 space-y-3">
 
-                  <p className="font-semibold">
-                    {item.classes?.[0]?.code}
-                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
 
-                  <p className="text-sm text-gray-500">
-                    {item.violation_categories?.[0]?.name}
-                  </p>
+                    <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+                      {item.classes?.[0]?.code ?? "-"}
+                    </span>
 
-                  <p className="text-sm">
-                    {item.description}
-                  </p>
+                    <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
+                      -{item.violation_categories?.[0]?.deduction ?? 0} poin
+                    </span>
 
-                  <p className="mt-2 text-xs text-gray-400">
-                    Guru: {item.teacher}
-                  </p>
+                  </div>
 
-                </div>
+                  <div>
 
-                <div className="text-xs text-gray-400">
-                  {new Date(
-                    item.violation_date
-                  ).toLocaleDateString("id-ID")}
+                    <p className="flex items-center gap-2 font-semibold text-slate-800">
+
+                      <AlertTriangle className="h-4 w-4 text-red-500" />
+
+                      {item.violation_categories?.[0]?.name ?? "-"}
+
+                    </p>
+
+                    <p className="mt-2 text-sm text-gray-600">
+                      {item.description}
+                    </p>
+
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+
+                    <span className="flex items-center gap-2">
+
+                      <User className="h-4 w-4" />
+
+                      {item.teacher}
+
+                    </span>
+
+                    <span className="flex items-center gap-2">
+
+                      <CalendarDays className="h-4 w-4" />
+
+                      {new Date(
+                        item.violation_date
+                      ).toLocaleDateString("id-ID")}
+
+                    </span>
+
+                  </div>
+
                 </div>
 
               </div>
 
             </div>
+
           ))
+
         )}
 
       </div>
