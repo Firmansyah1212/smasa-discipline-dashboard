@@ -2,6 +2,7 @@ import { getViolations } from "@/lib/services/violations";
 import ViolationsTable from "@/components/violations/violations-table";
 import AddViolationDialog from "@/components/violations/add-violation-dialog";
 
+export const dynamic = "force-dynamic";
 export default async function ViolationsPage() {
   const violations = await getViolations();
 

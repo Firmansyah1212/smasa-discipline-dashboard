@@ -2,8 +2,9 @@ import StatsCards from "@/components/dashboard/stat-cards";
 import RankingCard from "@/components/dashboard/ranking-card";
 import ActivityCard from "@/components/dashboard/activity-card";
 import ChartCard from "@/components/dashboard/chart-card";
-
 import { getDashboardStats } from "@/lib/services/dashboard";
+
+
 export const dynamic = "force-dynamic";
 console.log(new Date().toISOString());
 export default async function DashboardPage() {

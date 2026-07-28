@@ -1,6 +1,7 @@
 import { getPointStatistics } from "@/lib/services/statistics";
 import PointsChart from "@/components/statistics/points-chart";
 
+export const dynamic = "force-dynamic";
 export default async function PointsPage() {
   const data = await getPointStatistics();
 
