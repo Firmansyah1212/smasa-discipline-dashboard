@@ -7,6 +7,8 @@ import {
   ReportFilter as ReportFilterType,
 } from "@/lib/services/reports";
 
+export const dynamic = "force-dynamic";
+
 import { getFilterData } from "@/lib/services/report-filter";
 
 interface Props {

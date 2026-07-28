@@ -2,6 +2,7 @@ import SearchBox from "@/components/classes/class-searchbox";
 import ClassTable from "@/components/classes/class-table";
 import { getClasses } from "@/lib/services/classes";
 
+export const dynamic = "force-dynamic";
 export default async function ClassesPage() {
   const classes = await getClasses();
 

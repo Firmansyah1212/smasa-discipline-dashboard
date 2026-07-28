@@ -7,6 +7,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default function StatisticsPage() {
   const menus = [
     {

@@ -4,7 +4,8 @@ import ActivityCard from "@/components/dashboard/activity-card";
 import ChartCard from "@/components/dashboard/chart-card";
 
 import { getDashboardStats } from "@/lib/services/dashboard";
-
+export const dynamic = "force-dynamic";
+console.log(new Date().toISOString());
 export default async function DashboardPage() {
   const stats = await getDashboardStats();
 
