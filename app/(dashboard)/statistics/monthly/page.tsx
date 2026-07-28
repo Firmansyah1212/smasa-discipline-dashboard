@@ -2,6 +2,7 @@ import MonthlyChart from "@/components/statistics/monthly-chart";
 import { getMonthlyViolations } from "@/lib/services/monthly-statistics";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export default async function MonthlyPage() {
   const data = await getMonthlyViolations();
 

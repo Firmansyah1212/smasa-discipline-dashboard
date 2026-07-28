@@ -2,6 +2,7 @@ import CategoryChart from "@/components/statistics/category-chart";
 import { getCategoryStatistics } from "@/lib/services/category-statistics";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export default async function CategoryPage() {
   const data = await getCategoryStatistics();
 
