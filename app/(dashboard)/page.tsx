@@ -16,7 +16,7 @@ export default async function DashboardPage() {
       <div className="space-y-1">
 
         <h1 className="text-2xl font-bold md:text-4xl">
-          Dashboard Kedisiplinan
+          Si-Sambat
         </h1>
 
         <p className="text-sm text-gray-500 md:text-base">

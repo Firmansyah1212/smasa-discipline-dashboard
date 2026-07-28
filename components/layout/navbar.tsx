@@ -43,7 +43,7 @@ export default function Navbar() {
           </h2>
 
           <p className="hidden text-xs text-gray-500 md:block">
-            Dashboard Kedisiplinan
+            Si-Sambat
           </p>
 
         </div>

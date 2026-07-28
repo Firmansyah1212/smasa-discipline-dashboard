@@ -113,7 +113,7 @@ export default function Sidebar() {
             </h1>
 
             <p className="text-sm text-gray-500">
-              Dashboard Kedisiplinan
+            Si-Sambat
             </p>
 
           </div>
